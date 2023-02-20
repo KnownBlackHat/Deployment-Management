@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  Admin-Panel:
+    name: Admin Panel
+    build: 
+      dockerfile: admin-panel-dockerfile
+    restart: always
+    hostname: admin-panel
+    command: [nginx,"-g","daemon off;"]
+
