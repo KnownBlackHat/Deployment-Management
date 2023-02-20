@@ -1,8 +1,7 @@
 version: "3.7"
 
 services:
-  Admin-Panel:
-    name: Admin Panel
+  admin-panel:
     build: 
       dockerfile: admin-panel-dockerfile
     restart: always
