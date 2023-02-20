@@ -1,7 +1,9 @@
 FROM ubuntu:latest
-WORKDIR /root
-COPY frontend .
+WORKDIR /var/www/html
 RUN apt update -y && apt install nginx systemctl -y
+RUN rm -rf /etc/nginx/sites-* /var/www/html/*
 COPY nginx/default.conf /etc/nginx/conf.d/
-RUN rm -rf /etc/nginx/sites-*
-CMD [nginx,"-g","daemon off;"] 
+COPY frontend .
+RUN chmod 777 build
+EXPOSE 80
+CMD nginx -g "daemon off;"

@@ -6,5 +6,7 @@ services:
       dockerfile: admin-panel-dockerfile
     restart: always
     hostname: admin-panel
+    ports:
+      - "80:80"
     command: [nginx,"-g","daemon off;"]
 
