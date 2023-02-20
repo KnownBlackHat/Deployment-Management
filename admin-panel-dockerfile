@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 WORKDIR /root
 COPY frontend .
-RUN mv frontend/build .
-Run apt update -y && apt install nginx systemctl -y
+RUN apt update -y && apt install nginx systemctl -y
 COPY nginx/default.conf /etc/nginx/conf.d/
+RUN rm -rf /etc/nginx/sites-*
 CMD [nginx,"-g","daemon off;"] 
