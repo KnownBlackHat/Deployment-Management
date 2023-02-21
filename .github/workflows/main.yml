@@ -7,13 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:      
     
-      - name: Installating podman 
+      - name: Installating Nodejs
         run: sudo apt update -y && sudo apt install nodejs npm -y
         
       - name: Check out repository code
         uses: actions/checkout@v3
         
-      - name: Starting the build 
+      - name: Installing Dependencies
         run: cd frontend && npm i && npm run build
       
       - name: Ngrok Config
@@ -23,7 +23,7 @@ jobs:
         run: sudo ufw allow 80/tcp
 
       - name: Start Http Server
-        run: sudo python -m http.server 80
+        run: sudo python -m http.server 80 &
         
       - name: Starting Ngrok
         run: timeout 3600 sudo ngrok http 80
