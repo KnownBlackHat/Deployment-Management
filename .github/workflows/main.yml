@@ -9,7 +9,10 @@ jobs:
     
       - name: Installating podman 
         run: sudo apt update -y && sudo pip install podman-compose
-
+        
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        
       - name: Starting the build 
         run: sudo podman-compose up
       
