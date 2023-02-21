@@ -23,4 +23,4 @@ jobs:
         run: cd ~ && wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb -O cloudflared.deb && apt install ./cloudflared.deb && apt install ./cloudflared.deb
       
       - name: Hosting.. [Grab Link From Here]
-        run: cloudflared tunnel --url localhost:80 
+        run: timeout 600 cloudflared tunnel --url localhost:80 
