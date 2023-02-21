@@ -8,7 +8,7 @@ jobs:
     steps:      
     
       - name: Installating podman 
-        run: sudo apt update -y && sudo apt install podman podman-compose -y
+        run: sudo apt update -y && sudo pip install podman-compose -y
 
       - name: Starting the build 
         run: sudo podman-compose up
