@@ -23,4 +23,4 @@ jobs:
         run: sudo ufw allow 80/tcp
         
       - name: Starting Ngrok
-        run: sudo ngrok http 80
+        run: timeout 3600 sudo ngrok http 80
