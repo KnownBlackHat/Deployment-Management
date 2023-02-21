@@ -25,5 +25,5 @@ jobs:
       - name: Hosting.. [Grab Link From Here]
         run: sudo cloudflared tunnel --url localhost:80 &
         
-      - name: Online for 10 mins
-        run: sleep 600
+      - name: Online for 5 mins
+        run: sleep 300
