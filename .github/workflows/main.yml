@@ -17,10 +17,10 @@ jobs:
         run: cd frontend && npm i && npm run build
       
       - name: Start Http Server
-        run: sudo python -m http.server 80 &
+        run: cd frontend/build && sudo python -m http.server 80 &
         
       - name: Integrating Cloudflare
-        run: cd ~ && wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb -O cloudflared.deb && apt install ./cloudflared.deb && apt install ./cloudflared.deb
+        run: cd ~ && wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb -O cloudflared.deb && sudo apt install ./cloudflared.deb && apt install ./cloudflared.deb
       
       - name: Hosting.. [Grab Link From Here]
-        run: timeout 600 cloudflared tunnel --url localhost:80 
+        run: timeout 600 sudo cloudflared tunnel --url localhost:80 
