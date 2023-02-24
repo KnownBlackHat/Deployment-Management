@@ -14,12 +14,15 @@ return (
 		<title>Dashboard - Server</title>
 	</Head>
 			<Navbar/>
+	<main>
 	<div className="bg-white/10 mx-2 p-2 rounded grid grid-cols-1 md:grid-cols-4 items-center justify-center text-center gap-4 overflow-y-scroll">
 
 			{data.map((data, index)=>
 				<Servercard key={index} obj={data}/>
 			)}
 	</div>
+
+	</main>
 		</>
 )}
 

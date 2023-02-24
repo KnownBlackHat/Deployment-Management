@@ -1,6 +1,5 @@
 import React from 'react'
 import Head from 'next/head'
-import Script from 'next/script'
 import Link from 'next/link'
 
 export default function Home() {
@@ -13,7 +12,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
-	  <Script src='https://cdn.tailwindcss.com' strategy='beforeInteractive'></Script>
 
 	  <main className='h-screen w-screen text-center flex justify-center items-center text-4xl'>
 		<Link href="Dashboard"><button className='bg-gray-800 rounded p-2'>Dashboard</button></Link>
