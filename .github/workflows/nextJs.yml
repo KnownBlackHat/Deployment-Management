@@ -1,4 +1,4 @@
-name: Deployment Management Software 
+name: Next Workflow
 
 on: [workflow_dispatch,push,pull_request]
 
