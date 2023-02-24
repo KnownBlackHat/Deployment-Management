@@ -20,7 +20,7 @@ jobs:
         run: cd ~ && wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb -O cloudflared.deb && sudo apt install ./cloudflared.deb
         
       - name: Hosting.. [Grab Link From Here]
-        run: sudo cloudflared tunnel --url localhost:80 &
+        run: sudo cloudflared tunnel --url localhost:3000 &
         
       - name: Online for 5 mins
         run: sleep 300
