@@ -1,0 +1,26 @@
+name: Deployment Management Software 
+
+on: [workflow_dispatch,push,pull_request]
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:      
+    
+      - name: Installating Nodejs
+        run: sudo apt update -y && sudo apt install nodejs npm -y
+        
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        
+      - name: Installing Dependencies
+        run: cd nextJs-frontend/frontend && npm i && npm run dev
+
+      - name: Integrating Cloudflare
+        run: cd ~ && wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb -O cloudflared.deb && sudo apt install ./cloudflared.deb
+        
+      - name: Hosting.. [Grab Link From Here]
+        run: sudo cloudflared tunnel --url localhost:80 &
+        
+      - name: Online for 5 mins
+        run: sleep 300
