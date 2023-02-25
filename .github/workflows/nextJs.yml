@@ -17,7 +17,7 @@ jobs:
         run: cd nextJs-frontend/frontend && npm i && npm run build && npm run export
 
       - name: Starting Http Server
-        run: cd nextJs-frontend/frontend/out; sudo python -m http.server 80
+        run: cd nextJs-frontend/frontend/out; sudo python -m http.server 80 &
 
       - name: Integrating Cloudflare
         run: cd ~ && wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb -O cloudflared.deb && sudo apt install ./cloudflared.deb
