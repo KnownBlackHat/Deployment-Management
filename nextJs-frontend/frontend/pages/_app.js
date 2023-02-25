@@ -4,7 +4,7 @@ export default function App({ Component, pageProps }) {
 
 	return (
 		<>
-			<Script src='https://cdn.tailwindcss.com' strategy='beforeInteractive'></Script>
+			<Script src='https://cdn.tailwindcss.com' ></Script>
 
 			<Component {...pageProps} />
 		</>
