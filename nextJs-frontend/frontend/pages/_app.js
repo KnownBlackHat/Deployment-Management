@@ -1,11 +1,10 @@
-import '@/styles/globals.css'
-import Script from 'next/script'
+// import '@/styles/globals.css'
+
 export default function App({ Component, pageProps }) {
 
 	return (
 		<>
-			<Script src='https://cdn.tailwindcss.com' ></Script>
-
-			<Component {...pageProps} />
+		<script src="https://cdn.tailwindcss.com" defer ></script>
+		<Component {...pageProps} />
 		</>
 )}

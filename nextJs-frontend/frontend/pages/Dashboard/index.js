@@ -16,7 +16,7 @@ return (
 	</Head>
 			<Navbar/>
 	<main>
-	<div className="bg-white/10 mx-2 p-2 rounded grid grid-cols-1 md:grid-cols-4 items-center justify-center text-center gap-4 overflow-y-scroll">
+	<div className="items-center justify-center p-2 mx-2 overflow-y-scroll text-center rounded bg-white/10 grid grid-cols-1 md:grid-cols-4 gap-4">
 
 			{data.map((data, index)=>
 				<Link key={index} href={`/Client/${data.id}`}><Servercard obj={data}/></Link>
