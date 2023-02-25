@@ -13,8 +13,9 @@ export default function Home() {
       </Head>
       
 
-	  <main className='h-screen w-screen text-center flex justify-center items-center text-4xl'>
+	  <main className='h-screen w-screen text-center flex flex-col space-y-4 justify-center items-center text-4xl'>
 		<Link href="Dashboard"><button className='bg-gray-800 rounded p-2'>Dashboard</button></Link>
+		<Link href="Client"><button className='bg-gray-800 rounded p-2'>Client</button></Link>
      </main>
     </>
   )

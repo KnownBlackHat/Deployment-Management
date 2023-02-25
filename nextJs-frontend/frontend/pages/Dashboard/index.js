@@ -1,5 +1,6 @@
 import React from "react";
-import Navbar from "./components/NavBar";
+import Link from 'next/link';
+import Navbar from "../../components/Dashboard/NavBar"
 import Head  from "next/head";
 
 export default function Dashboard () {
@@ -18,7 +19,7 @@ return (
 	<div className="bg-white/10 mx-2 p-2 rounded grid grid-cols-1 md:grid-cols-4 items-center justify-center text-center gap-4 overflow-y-scroll">
 
 			{data.map((data, index)=>
-				<Servercard key={index} obj={data}/>
+				<Link key={index} href={`/Client/${data.id}`}><Servercard obj={data}/></Link>
 			)}
 	</div>
 

@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "./components/NavBar";
+import Navbar from "../../components/Dashboard/NavBar"
 import Head  from "next/head";
 
 export default function Dashboard () {
