@@ -2,10 +2,12 @@ import React from "react";
 import Link from 'next/link';
 import Navbar from "../../components/Dashboard/NavBar"
 import Head  from "next/head";
+import axios from 'axios';
+
 
 export async function getServerSideProps() {
-  const res = await fetch(`http://localhost:3000/api/getserver`)
-  const data = await res.json()
+  const res = await axios.get("http://0.0.0.0/api/getserver")
+  const data = await res.data
 
   return { props: { data } }
 }
