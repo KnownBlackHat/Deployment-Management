@@ -26,12 +26,12 @@ return (
 	</Head>
 			<Navbar/>
 	<main>
-	<div className="items-center justify-center p-2 mx-2 overflow-y-scroll text-center rounded bg-white/10 grid grid-cols-1 md:grid-cols-4 gap-4">
+	<section className={`items-center justify-center p-2 mx-2 overflow-y-scroll text-center rounded bg-white/10 ${data.length===0? "flex flex-wrap": "grid grid-cols-1 md:grid-cols-4 gap-4"}`}>
 
-			{data.length===0? <span>No Servers Found!</span> : data.map((data, index)=>
+			{data.length===0? <span className="text-center">No Servers Found!</span> : data.map((data, index)=>
 				<Link key={index} href={`/Client/${data._id}`}><Servercard obj={data}/></Link>
 			)}
-	</div>
+	</section>
 	</main>
 		</>
 )}
