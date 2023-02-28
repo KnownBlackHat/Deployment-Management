@@ -3,11 +3,11 @@ import Head from "next/head";
 import {useRouter} from "next/router";
 import StatsCard from "@/components/StatsCard";
 
+
+
 export default function Client () {
 const router = new useRouter()
-return (
-
-	<>
+return(<>
 		<Head>
 			<title>Client</title>
 		</Head>
@@ -24,7 +24,5 @@ return (
 		
 				</div>
 		</main>
-	</>
+	</>)}
 
-);
-}

@@ -21,6 +21,8 @@
   "devDependencies": {
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.21",
+    "react-icons": "^4.7.1",
+    "react-toastify": "^9.1.1",
     "tailwindcss": "^3.2.7"
   }
 }
