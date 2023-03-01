@@ -17,11 +17,8 @@ jobs:
       - name: Installing Dependencies
         run: cd frontend && sudo systemctl start mongod && npm i && npm run build ; sudo npm run start &
 
-      - name: Integrating Cloudflare
-        run: cd ~ && wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb -O cloudflared.deb && sudo apt install ./cloudflared.deb
-        
       - name: Hosting.. [Grab Link From Here]
-        run: sudo cloudflared tunnel --url localhost:80 &
+        run: sudo ssh -R 80:localhost:80 nokey@localhost.run &
         
       - name: Online for 5 mins
         run: sleep 300
