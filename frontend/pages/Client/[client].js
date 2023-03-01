@@ -3,16 +3,27 @@ import Head from "next/head";
 import {useRouter} from "next/router";
 import StatsCard from "@/components/StatsCard";
 import DeleteServerBtn from "@/components/DeleteServer";
+import axios from 'axios';
+import Error from 'next/error';
 
+export async function getServerSideProps({params}) {
+	let dbdata
+  try {const res = await axios.post("http://0.0.0.0/api/getserver", {id: params.client })
+   dbdata = await res.data}
+	catch { dbdata = null}
 
-export default function Client () {
-	const router = useRouter()
+  return { props: { dbdata } }
+}
+
+export default function Client ({dbdata}) {
+const router = useRouter()
+	if (dbdata){
 	return(<>
 		<Head>
 		<title>Client</title>
 		</Head>
 		<main>
-		<div className="p-1 my-2 text-center text-white bg-red-500 rounded">Client Id: {router.query.client}</div>
+		<div className={`p-1 my-2 text-center text-white bg-${dbdata.status==="online"?"green":"red"}-500 rounded`}>Server Name: {dbdata.name}</div>
 		<div  className="h-[60vh] p-1 rounded text-sm bg-gray-700 overflow-y-scroll text-white">
 		<span>Shell: </span>
 		</div>
@@ -26,4 +37,6 @@ export default function Client () {
 		<DeleteServerBtn Slugid={router.query.client}/>
 		</main>
 		</>)}
+	else {return <Error statusCode={404}/>}
+}
 
