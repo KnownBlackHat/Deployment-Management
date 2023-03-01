@@ -9,7 +9,7 @@ function handler(req,res) {
 			status: req.body.status
 
 		})).save()
-		res.status(200).json({success:"success"})
+		res.status(200).json({success:true})
 	}
 	else {
 		res.status(405).json({error:"Method Not Allowed"})

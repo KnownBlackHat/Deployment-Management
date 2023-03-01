@@ -5,9 +5,9 @@ function handler(req,res) {
 	if (req.method === "POST") {
 		model.findByIdAndDelete( req.body.id ,function(err) {
   if (err) {
-	res.status(200).json({success:err})
+	res.status(400).json({error:err})
   } else {
-	res.status(200).json({success:`deleted ${req.body.id}`})
+	res.status(200).json({success:true})
   }
 } )
 	}
