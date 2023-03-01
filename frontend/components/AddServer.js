@@ -1,6 +1,6 @@
 import {SlClose} from "react-icons/sl";
 import axios from 'axios';
-import {useRef, useState} from 'react';
+import { useState} from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from "next/router";
@@ -8,15 +8,11 @@ import { useRouter } from "next/router";
 
 export default function AddServerBtn () {
 	const router = useRouter()
-	const Formref = useRef()
-	const [formName, setformName] = useState()
-	const [fromOwner, setformOwner] = useState()
+	const [Form, setForm]=useState(false)
+	const [formName, setformName] = useState('')
+	const [fromOwner, setformOwner] = useState('')
 
 
-	const handleForm = () => {
-		Formref.current.classList.toggle("hidden")
-		Formref.current.classList.toggle("fixed")
-	}
 	const handleSubmitFrom = e => {
 		e.preventDefault()
 		axios.post("/api/addserver",{name: formName, owner: fromOwner, status: "offline"})
@@ -61,14 +57,11 @@ export default function AddServerBtn () {
 
 
 	return	<div className="flex items-center justify-center m-2 text-center">
-		<button onClick={handleForm} className="p-2 bg-green-600 border-2 rounded">Add Server</button>
+		<button onClick={()=>{setForm(true)}} className="p-2 bg-green-600 border-2 rounded">Add Server</button>
 
-		<form onSubmit={handleSubmitFrom} ref={Formref}  className="inset-0 hidden overflow-y-scroll text-black bg-black body-font">
+		{Form && <form onSubmit={handleSubmitFrom} className="fixed inset-0 overflow-y-scroll text-black bg-black body-font">
 		<div className='flex justify-end m-4'>
-		<SlClose className='text-3xl text-white cursor-pointer'  onClick={()=>{
-			Formref.current.classList.toggle("hidden")
-			Formref.current.classList.toggle("fixed")
-		}}/>
+		<SlClose className='text-3xl text-white cursor-pointer'  onClick={()=>{setForm(false)}}/>
 		</div>
 		<div className="container px-5 py-24 mx-auto">
 		<div className="flex flex-col w-full mb-12 text-center">
@@ -98,7 +91,7 @@ export default function AddServerBtn () {
 		</div>
 		</div>
 		</div>
-		</form>
+		</form>}
 		</div>
 
 }
