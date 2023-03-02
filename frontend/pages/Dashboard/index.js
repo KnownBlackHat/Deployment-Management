@@ -1,22 +1,27 @@
 import Link from 'next/link';
-import Navbar from "../../components/Dashboard/NavBar"
+import Navbar from "@/components/Dashboard/NavBar"
 import Head  from "next/head";
-import AddServerBtn from '@/components/AddServer';
+import AddServerBtn from '@/components/Dashboard/AddServer';
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import LoadingSvg from '@/components/LoadingSvg';
 
+export async function getServerSideProps () {
+	const res = await axios.post("/api/getserver",{limit: 50})
+	const data = await res.data 
 
-export default function Dashboard () {
+	return { props: {data} }
+} 
 
-	const [limit, setLimit] = useState(20)
-	const [dbdata, setDbdata] = useState({ data: []})
-	useEffect(() => {
-		async function getdata () {
-			const res = await axios.post("/api/getserver",{limit: limit})
-			setDbdata( await res.data )}
-		getdata()
-	},[])
+export default function Dashboard ({data}) {
+
+	const [limit, setLimit] = useState(10)
+	const [dbdata, setDbdata] = useState(data)
+
+	const fetchmoredata = async () => 
+	{ setDbdata((await axios.post("/api/getserver",{limit: limit+20 })).data); setLimit(lim=>lim+20) }
+
 	return ( 
 		<>
 		<Head>
@@ -25,23 +30,18 @@ export default function Dashboard () {
 		<Navbar/>
 		<main>
 		<AddServerBtn Dbdata={{set: setDbdata, data: dbdata}}/>
-		<div className="container mx-auto">
 		<InfiniteScroll
 		dataLength={dbdata.data.length} 
-		next={ async () => { setDbdata((await axios.post("/api/getserver",{limit: limit+limit })).data); setLimit(lim=>lim+lim) } }
+		next={ fetchmoredata }
 		hasMore={dbdata.next?true:false}
-		loader={<h4>Loading...</h4>}
-		endMessage={
-			<p style={{ textAlign: 'center' }}>
-			<b>Yay! You have seen it all</b>
-			</p>}>
-		<section className={`items-center justify-center p-2 mx-2 overflow-auto text-center rounded bg-white/10 ${dbdata.data.length===0? "flex flex-wrap": "grid grid-cols-1 md:grid-cols-4 gap-4"}`}>
+		loader={<LoadingSvg/>}>
+
+		<section className={`items-center justify-center p-2 text-center bg-white/10 rounded ${dbdata.data.length===0? "flex flex-wrap": "grid grid-cols-1 md:grid-cols-3 gap-4 "}`}>
 		{dbdata.data.length===0? <span className="text-center">No Servers Found!</span> : dbdata.data.map((data, index)=>
-			<Link className='overflow-hidden cursor-pointer' key={index} href={`/Client/${data._id}`}><Servercard obj={data}/></Link>
+			<div key={index}><Link className='overflow-hidden cursor-pointer' key={index} href={`/Client/${data._id}`}><Servercard obj={data}/></Link></div>
 		)}
 		</section>
 		</InfiniteScroll>
-		</div>
 		</main>
 		</>
 	)}

@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {IoAddCircleOutline} from "react-icons/io5";
 
-export default function AddServerBtn ( {Dbdata} ) {
+export default function AddServerBtn ( ) {
 	const [Form, setForm]=useState(false)
 	const [formName, setformName] = useState('')
 	const [fromOwner, setformOwner] = useState('')
@@ -24,7 +24,7 @@ export default function AddServerBtn ( {Dbdata} ) {
 						draggable: true,
 						progress: undefined,
 						theme: "dark"}
-					);Dbdata.set({...Dbdata.data,next:true})}
+					)}
 				else {
 					toast.error(res.error, { position: "top-right",
 						autoClose: 1000,

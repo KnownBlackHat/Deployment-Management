@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import {useRouter} from "next/router";
 import StatsCard from "@/components/StatsCard";
-import DeleteServerBtn from "@/components/DeleteServer";
+import DeleteServerBtn from "@/components/Client/DeleteServer";
 import axios from 'axios';
 import Error from 'next/error';
 
