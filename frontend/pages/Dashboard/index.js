@@ -8,7 +8,7 @@ import { useState } from 'react';
 import LoadingSvg from '@/components/LoadingSvg';
 
 export async function getServerSideProps () {
-	const res = await axios.post("/api/getserver",{limit: 50})
+	const res = await axios.post("http://0.0.0.0/api/getserver",{limit: 50})
 	const data = await res.data 
 
 	return { props: {data} }
