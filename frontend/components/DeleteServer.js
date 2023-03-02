@@ -2,7 +2,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from "next/router";
-
+import {MdDeleteOutline} from "react-icons/md";
 
 export default function DeleteServerBtn ({Slugid}) {
 	const router = useRouter()
@@ -49,7 +49,8 @@ export default function DeleteServerBtn ({Slugid}) {
 
 
 	return	<div className="flex items-center justify-center m-2 text-center">
-		<button onClick={handleClick} className="p-2 bg-red-600 border-2 rounded">Delete Server</button>
+
+		<button onClick={handleClick} className="flex flex-wrap items-center p-2 bg-red-600 border-2 rounded"><MdDeleteOutline className='text-2xl'/>Delete Server</button>
 		<ToastContainer position="top-right" autoClose={1000} hideProgressBar newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="dark"/>
 		</div>
 

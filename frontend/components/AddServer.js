@@ -3,11 +3,9 @@ import axios from 'axios';
 import { useState} from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useRouter } from "next/router";
+import {IoAddCircleOutline} from "react-icons/io5";
 
-
-export default function AddServerBtn () {
-	const router = useRouter()
+export default function AddServerBtn ( {Dbdata} ) {
 	const [Form, setForm]=useState(false)
 	const [formName, setformName] = useState('')
 	const [fromOwner, setformOwner] = useState('')
@@ -26,7 +24,7 @@ export default function AddServerBtn () {
 						draggable: true,
 						progress: undefined,
 						theme: "dark"}
-					);router.push(window.location.pathname)}
+					);Dbdata.set({...Dbdata.data,next:true})}
 				else {
 					toast.error(res.error, { position: "top-right",
 						autoClose: 1000,
@@ -57,11 +55,11 @@ export default function AddServerBtn () {
 
 
 	return	<div className="flex items-center justify-center m-2 text-center">
-		<button onClick={()=>{setForm(true)}} className="p-2 bg-green-600 border-2 rounded">Add Server</button>
+		<button onClick={()=>{setForm(true);document.body.classList.toggle("overflow-hidden")}} className="flex flex-wrap items-center p-2 bg-green-600 border-2 rounded"><IoAddCircleOutline className="mr-3 text-3xl" />Add Server</button>
 
-		{Form && <form onSubmit={handleSubmitFrom} className="fixed inset-0 overflow-y-scroll text-black bg-black body-font">
+		{Form && <form onSubmit={handleSubmitFrom} className="fixed inset-0 overflow-auto text-black bg-black body-font">
 		<div className='flex justify-end m-4'>
-		<SlClose className='text-3xl text-white cursor-pointer'  onClick={()=>{setForm(false)}}/>
+		<SlClose className='text-3xl text-white cursor-pointer'  onClick={()=>{setForm(false);document.body.classList.toggle("overflow-hidden")}}/>
 		</div>
 		<div className="container px-5 py-24 mx-auto">
 		<div className="flex flex-col w-full mb-12 text-center">
@@ -86,7 +84,7 @@ export default function AddServerBtn () {
 		</div>
 
 		<div className="w-full p-2">
-		<button type='submit' className="flex px-8 py-2 mx-auto text-lg text-white bg-green-500 border-0 rounded focus:outline-none hover:bg-green-600">Add</button>
+		<button type='submit' className="flex px-8 py-2 mx-auto text-lg text-white bg-green-500 border-0 rounded focus:outline-none hover:bg-green-600"><IoAddCircleOutline className="text-3xl" /></button>
 		</div>
 		</div>
 		</div>
