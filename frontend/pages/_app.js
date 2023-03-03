@@ -2,6 +2,7 @@
 import LoadingBar from "react-top-loading-bar";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Script from 'next/script'
 
 export default function App({ Component, pageProps }) {
 	const router = useRouter()
@@ -14,7 +15,7 @@ export default function App({ Component, pageProps }) {
 		,[router.query, router.events])
 	return (
 		<>
-		<script src="https://cdn.tailwindcss.com" defer ></script>
+		<Script src="https://cdn.tailwindcss.com" defer />
 		<LoadingBar
         color='red'
 		waitingTime={500}
