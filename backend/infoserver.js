@@ -5,35 +5,38 @@ const Server = require('socket.io');
 // TODO: Replace with your own port & cors origin
 const io = new Server.Server(3000, { cors: { origin: '*' } });
 
-const cpususage = () => {
-	// Calculate the total CPU usage
-	let totalUsage = 0;
-	for (let i = 0; i < os.cpus().length; i++) {
-	const cpu = os.cpus()[i];
-	const total = cpu.times.user + cpu.times.nice + cpu.times.sys + cpu.times.idle;
-	const usage = 100 - (cpu.times.idle / total) * 100;
-	totalUsage += usage;
-	}
-	return totalUsage.toFixed(2)
+
+
+function calculateUpTime() {
+	// Calculate the uptime
+	const seconds = os.uptime()
+	const days = Math.floor(seconds / (24 * 60 * 60)); // calculate the number of days
+	const hours = Math.floor((seconds % (24 * 60 * 60)) / (60 * 60)); // calculate the number of hours
+	const minutes = Math.floor((seconds % (60 * 60)) / 60); // calculate the number of minutes
+	return((days===0 ? '' : days + 'd ') + (hours===0 ? '' : hours + 'h ') + (minutes===0 ? '' : minutes + 'm '))
+
 }
-
-
-function calculateFreeDiskSpace() {
-	// Calculate the free disk space
-	return diskusage.checkSync('/').free / 1000000000;
-}
-
 
 
 io.on('connection', (socket) => {
-	console.log('Client connected');
+	console.log('[+] Client connected');
 	socket.on('statsreq', () => {
-		socket.emit("statsres",{
+		socket.volatile.emit("statsres",{
 			hostname: os.hostname(),
 			release: os.release(),
-			uptime: `${Math.floor(os.uptime() / 3600)} hr ${Math.floor(os.uptime() / 60)} min`,
+			uptime: calculateUpTime(),
+			platform: os.type(),
+			
+			totalmem: (os.totalmem()/(1024*1024)).toFixed(0)+" MiB",
+			usedmem: ((os.totalmem() - os.freemem())/(1024*1024)).toFixed(0)+" MiB",
 			memUsage: (((os.totalmem() - os.freemem()) / os.totalmem())*100).toFixed(2),
-			cpusUsage: cpususage(),
-			freeDiskSpace: calculateFreeDiskSpace().toFixed(2),
+
+			totalDiskSpace: (diskusage.checkSync('/').total / 1000000000).toFixed(2)+" GiB",
+			usedDiskSpace: ((diskusage.checkSync('/').total - diskusage.checkSync('/').free) / 1000000000).toFixed(2)+" GiB",
+			diskUsage: ((diskusage.checkSync('/').total - diskusage.checkSync('/').free) / diskusage.checkSync('/').total * 100).toFixed(2),
+
 		});})
+	socket.on("disconnect", (reason) => {
+		console.log('[!] Client Disconnected Reason: ',reason);
+  });
 })
