@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Navbar from "@/components/Dashboard/NavBar"
 import Head  from "next/head";
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,15 +8,25 @@ import {SlClose} from "react-icons/sl";
 
 export default function Dashboard () {
 	// TODO: Finish this page
-	const handleSubmitFrom = (e) => {}
-	const handleOnChange = (e) => {}
+	const [form, setForm] = useState(false);
+	const [data, setData] = useState({})
+	const handleSubmitFrom = (e) => { e.preventDefault(); console.log(data); toast.success("Form Submitted"); setData({}) }
+	const handleOnChange = (e) => {
+		const {name, value} = e.target;
+		setData({...data, [name]: value})
+	}
 	return ( 
 		<>
 		<Head>
 		<title>Dashboard - Config</title>
 		</Head>
 		<Navbar/>
-		<form onSubmit={handleSubmitFrom} className="fixed inset-0 overflow-auto text-black bg-black body-font">
+
+		<div className="flex flex-col m-4 mb-12 text-center">
+			<button className="p-2 bg-green-600 rounded" onClick={()=>{setForm(true);document.body.classList.toggle("overflow-hidden")}}>Config 1</button>
+		</div>
+
+		{form && <form onSubmit={handleSubmitFrom} className="fixed inset-0 overflow-auto text-black bg-black body-font">
 		<div className='flex justify-end m-4'>
 		<SlClose className='text-3xl text-white cursor-pointer'  onClick={()=>{setForm(false);document.body.classList.toggle("overflow-hidden")}}/>
 		</div>
@@ -32,7 +42,7 @@ export default function Dashboard () {
 		<div className="w-1/2 p-2">
 		<div className="relative">
 		<label htmlFor="name" className="text-sm text-gray-400 leading-7">Name</label>
-		<input onChange={handleOnChange} type="text" required id="name" name="name" className="w-full px-3 py-1 text-base text-gray-100 bg-gray-800 border border-gray-700 rounded outline-none bg-opacity-40 focus:border-green-500 focus:bg-gray-900 focus:ring-2 focus:ring-green-900 leading-8 transition-colors duration-200 ease-in-out"/>
+		<input onChange={handleOnChange}  type="text" required id="name" name="name" className="w-full px-3 py-1 text-base text-gray-100 bg-gray-800 border border-gray-700 rounded outline-none bg-opacity-40 focus:border-green-500 focus:bg-gray-900 focus:ring-2 focus:ring-green-900 leading-8 transition-colors duration-200 ease-in-out"/>
 		</div>
 		</div>
 		<div className="w-1/2 p-2">
@@ -48,7 +58,7 @@ export default function Dashboard () {
 		</div>
 		</div>
 		</div>
-		</form>
+		</form>}
 		</>
 	)}
 

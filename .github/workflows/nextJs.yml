@@ -17,8 +17,11 @@ jobs:
       - name: Installing Dependencies
         run: cd frontend && sudo systemctl start mongod && npm i && npm run build ; sudo npm run start &
 
+      - name: Starting Servers
+        run: cd backend && npm i;node infoserver.js &
+
       - name: Hosting.. [Grab Link From Here]
         run: ssh -R 80:localhost:80 nokey@localhost.run &
         
-      - name: Online for 5 mins
-        run: sleep 300
+      - name: Online for 10 mins
+        run: sleep 600
