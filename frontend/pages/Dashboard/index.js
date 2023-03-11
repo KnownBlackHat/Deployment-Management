@@ -19,8 +19,10 @@ export default function Dashboard ({data}) {
 	const [limit, setLimit] = useState(10)
 	const [dbdata, setDbdata] = useState(data)
 
-	const fetchmoredata = async () => 
-	{ setDbdata((await axios.post("/api/getserver",{limit: limit+20 })).data); setLimit(lim=>lim+20) }
+	const fetchmoredata = async () => {
+        setDbdata((await axios.post("/api/getserver",{limit: limit+20 })).data);
+        setLimit(lim=>lim+20) 
+    }
 
 	return ( 
 		<>
